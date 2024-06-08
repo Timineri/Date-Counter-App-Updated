@@ -4,7 +4,6 @@ import { useState } from "react";
 export default function Counter() {
   const [step, setStep] = useState(1);
   const [count, setCount] = useState(0);
-  const [date, setDate] = useState(new Date().toDateString());
 
   function handleIncrementStep() {
     setStep((step) => step + 1);
@@ -18,9 +17,9 @@ export default function Counter() {
   function handleDecrementCount() {
     setCount((count) => count - step);
   }
-  function dateIncrement() {
-    setDate((date) => date + 1);
-  }
+  const date = new Date();
+  date.setDate(date.getDate() + count);
+
   return (
     <div>
       <div>
@@ -33,7 +32,14 @@ export default function Counter() {
         <span>Count: {count}</span>
         <button onClick={handleIncrementCount}>+</button>
       </div>
-      <p>Today is {date} </p>
+      <span>
+        {count === 0
+          ? "Today is "
+          : count > 0
+          ? `${count} days from today is `
+          : `${Math.abs(count)} days ago was `}
+      </span>
+      <span>{date.toDateString()}</span>
     </div>
   );
 }
