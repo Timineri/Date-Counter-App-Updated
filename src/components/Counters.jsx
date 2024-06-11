@@ -56,9 +56,11 @@ export default function Counter() {
       </span>
       <span>{date.toDateString()}</span>
 
-      <div>
-        <button onClick={handleReset}>Reset</button>
-      </div>
+      {count !== 0 || step !== 1 ? (
+        <div>
+          <button onClick={handleReset}>Reset</button>
+        </div>
+      ) : null}
     </div>
   );
 }
